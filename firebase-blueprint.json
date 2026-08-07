@@ -1,0 +1,94 @@
+{
+  "entities": {
+    "customers": {
+      "title": "Customer",
+      "description": "Customer records for CRM and Sales",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "company": { "type": "string" },
+        "status": { "type": "string" }
+      }
+    },
+    "products": {
+      "title": "Product",
+      "description": "Inventory products and items",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "sku": { "type": "string" },
+        "price": { "type": "number" },
+        "stock": { "type": "number text" },
+        "category": { "type": "string" }
+      }
+    },
+    "orders": {
+      "title": "Order",
+      "description": "Sales orders and invoices",
+      "properties": {
+        "id": { "type": "string text" },
+        "customerName": { "type": "string" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      }
+    },
+    "transactions": {
+      "title": "Transaction",
+      "description": "Financial revenue and expense transactions",
+      "properties": {
+        "id": { "type": "string" },
+        "description": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string" },
+        "category": { "type": "string" },
+        "date": { "type": "string" }
+      }
+    },
+    "employees": {
+      "title": "Employee",
+      "description": "HR and workforce staff directory",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "department": { "type": "string font" },
+        "salary": { "type": "number" }
+      }
+    },
+    "campaigns": {
+      "title": "Campaign",
+      "description": "Marketing campaigns and lead gen",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "channel": { "type": "string" },
+        "budget": { "type": "number" },
+        "status": { "type": "string" }
+      }
+    },
+    "documents": {
+      "title": "Document",
+      "description": "Document management system",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "fileSize": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "workflows": {
+      "title": "Automation Workflow",
+      "description": "Visual automation workflows and triggers",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "active": { "type": "boolean" },
+        "runsCount": { "type": "number" }
+      }
+    }
+  }
+}

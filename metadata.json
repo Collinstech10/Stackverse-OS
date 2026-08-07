@@ -1,0 +1,6 @@
+{
+  "name": "StackVerse OS",
+  "description": "The Operating System for Modern African Businesses - Complete enterprise SaaS platform featuring CRM, Finance, Inventory, POS, HR, Marketing, Automation, & AI Insights.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
