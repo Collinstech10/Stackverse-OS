@@ -63,6 +63,10 @@ export default function App() {
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setAuthUser(user);
+      if (user) {
+        setPlatformView('app');
+        setCurrentView('dashboard');
+      }
     });
     return () => unsubscribe();
   }, []);
@@ -80,9 +84,9 @@ export default function App() {
 
   // Global Application State
   const [currentWorkspace, setCurrentWorkspace] = useState<Workspace>(WORKSPACES[0]);
-  const [currentView, setCurrentView] = useState<ViewMode>('dashboard');
+  const [currentView, setCurrentView] = useState<ViewMode>('login');
   const [deviceType, setDeviceType] = useState<DeviceType>('desktop');
-  const [platformView, setPlatformView] = useState<'app' | 'landing' | 'auth' | 'design-system'>('app');
+  const [platformView, setPlatformView] = useState<'app' | 'landing' | 'auth' | 'design-system'>('auth');
   const [currency, setCurrency] = useState<Currency>('NGN');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 

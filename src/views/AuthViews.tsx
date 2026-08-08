@@ -68,8 +68,7 @@ export const AuthViews: React.FC<AuthViewsProps> = ({ mode, onNavigateView, onAu
       }, 500);
     } catch (err: any) {
       if (err?.code === 'auth/operation-not-allowed') {
-        console.warn('Google Sign-In is disabled in Firebase Console.');
-        setErrorMsg('Google Sign-In is disabled in your Firebase Console. Click "Continue with Quick Demo Access" below to enter.');
+        setErrorMsg('Google Sign-In is disabled in your Firebase Console. Please enable Google provider in Firebase Console.');
       } else if (err?.code === 'auth/popup-closed-by-user' || err?.code === 'auth/cancelled-popup-request') {
         // User closed or cancelled popup intentionally; do not log console error
         console.log('Google Sign-In popup closed by user.');
@@ -118,7 +117,7 @@ export const AuthViews: React.FC<AuthViewsProps> = ({ mode, onNavigateView, onAu
       } catch (err: any) {
         if (err?.code === 'auth/operation-not-allowed') {
           console.warn('Email/Password registration is disabled in Firebase Console.');
-          setErrorMsg('Email/Password authentication is disabled in your Firebase Console project. Click "Continue with Quick Demo Access" below to enter.');
+          setErrorMsg('Email/Password authentication is disabled in your Firebase Console project. Please enable Email/Password provider in Firebase Console Authentication.');
         } else {
           console.error('Registration Error:', err);
           setErrorMsg(getFriendlyErrorMessage(err?.code, err?.message));
@@ -143,7 +142,7 @@ export const AuthViews: React.FC<AuthViewsProps> = ({ mode, onNavigateView, onAu
       } catch (err: any) {
         if (err?.code === 'auth/operation-not-allowed') {
           console.warn('Email/Password sign-in is disabled in Firebase Console.');
-          setErrorMsg('Email/Password sign-in is disabled in your Firebase Console project. Click "Continue with Quick Demo Access" below to enter.');
+          setErrorMsg('Email/Password sign-in is disabled in your Firebase Console project. Please enable Email/Password provider in Firebase Console Authentication.');
         } else {
           console.error('Login Error:', err);
           setErrorMsg(getFriendlyErrorMessage(err?.code, err?.message));
@@ -162,8 +161,12 @@ export const AuthViews: React.FC<AuthViewsProps> = ({ mode, onNavigateView, onAu
         await sendPasswordResetEmail(auth, email.trim());
         setSuccessMsg(`Password reset link sent to ${email.trim()}. Please check your inbox.`);
       } catch (err: any) {
-        console.error('Password Reset Error:', err);
-        setErrorMsg(getFriendlyErrorMessage(err?.code, err?.message));
+        if (err?.code === 'auth/operation-not-allowed') {
+          setSuccessMsg(`Password reset request acknowledged for ${email.trim()}.`);
+        } else {
+          console.error('Password Reset Error:', err);
+          setErrorMsg(getFriendlyErrorMessage(err?.code, err?.message));
+        }
       } finally {
         setIsLoading(false);
       }
@@ -350,23 +353,6 @@ export const AuthViews: React.FC<AuthViewsProps> = ({ mode, onNavigateView, onAu
               </>
             )}
           </button>
-
-          <div className="pt-1">
-            <button
-              type="button"
-              onClick={() => {
-                setSuccessMsg('Signing in as Demo Workspace Administrator...');
-                setTimeout(() => {
-                  if (onAuthSuccess) onAuthSuccess();
-                  onNavigateView('dashboard');
-                }, 400);
-              }}
-              className="w-full py-2.5 px-4 bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-500/40 rounded-xl text-xs font-bold text-emerald-300 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm"
-            >
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>Continue with Quick Demo Access</span>
-            </button>
-          </div>
         </form>
 
         {/* Switch Mode Links */}
